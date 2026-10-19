@@ -18,6 +18,7 @@ test('dist/verse-echo.html 单文件版 DOM 冒烟测试', { timeout: 120000 }, 
   const html = fs.readFileSync(file, 'utf8');
   assert.ok(!html.includes('assets/icon.png'), '图标应内嵌为 data URI，不应再有相对路径引用');
   assert.ok(html.includes('data:image/png;base64,'), '应包含内嵌图标');
+  assert.ok(!html.includes('buildWorkerBlobUrl'), '单文件版不应依赖 blob worker');
   const errors = [];
   const dom = new JSDOM(html, {
     url: 'http://localhost:8080/verse-echo.html',
@@ -76,4 +77,45 @@ test('dist/verse-echo.html 单文件版 DOM 冒烟测试', { timeout: 120000 }, 
   assert.ok($('aboutOverlay').textContent.includes('隐私说明'));
   $('aboutCloseBtn').click();
   assert.strictEqual($('aboutOverlay').hidden, true);
+});
+
+test('dist/verse-echo-cuvs.html 精简版（仅和合本简体）DOM 冒烟测试', { timeout: 120000 }, async t => {
+  if (!JSDOM) return t.skip('未安装 jsdom（npm i jsdom 后自动生效）');
+  const file = path.join(root, 'dist', 'verse-echo-cuvs.html');
+  if (!fs.existsSync(file)) return t.skip('dist/verse-echo-cuvs.html 不存在，先运行 node scripts/build-standalone.cjs --edition cuvs');
+
+  const html = fs.readFileSync(file, 'utf8');
+  const size = fs.statSync(file).size;
+  assert.ok(size < 8 * 1048576, '精简版应小于 8 MB（实际 ' + (size / 1048576).toFixed(1) + ' MB）');
+  assert.ok(!html.includes('buildWorkerBlobUrl'), '精简版不应依赖 blob worker');
+
+  const dom = new JSDOM(html, {
+    url: 'http://localhost:8080/verse-echo-cuvs.html',
+    runScripts: 'dangerously',
+    pretendToBeVisual: true,
+    beforeParse(window) { window.Worker = undefined; window.document.execCommand = () => true; }
+  });
+  const { window } = dom;
+  const { document } = window;
+  const $ = id => document.getElementById(id);
+  const until = (fn, ms = 30000) => new Promise((res, rej) => {
+    const t0 = Date.now();
+    const iv = setInterval(() => {
+      if (fn()) { clearInterval(iv); res(); }
+      else if (Date.now() - t0 > ms) { clearInterval(iv); rej(new Error('timeout')); }
+    }, 100);
+  });
+  t.after(() => window.close());
+
+  await until(() => document.body.textContent.includes('文字库已就绪 · 31103 节'));
+  assert.strictEqual($('editionSelect').options.length, 1, '精简版译本选择器应只有一个译本');
+  assert.strictEqual($('editionSelect').options[0].textContent, '和合本 · 简体');
+
+  const q = $('query');
+  q.value = '给我水喝';
+  q.dispatchEvent(new window.Event('input', { bubbles: true }));
+  $('searchBtn').click();
+  await until(() => document.querySelector('.result-list .card'));
+  assert.ok(document.querySelector('.result-list .card').textContent.includes('约翰福音 4:10'));
+  console.log('  精简版（' + (size / 1048576).toFixed(1) + ' MB）加载与检索正常');
 });

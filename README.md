@@ -11,6 +11,7 @@
 - 检索引擎 `web/engine.js`、繁简映射 `web/normalize.js`、译本元数据 `web/manifest.js`、引用模板 `web/quote.js`，以及 15 个文字库数据文件 `web/data/*.js` 与 `miniprogram/` 原件逐字节一致，未做修改。
 - `web/worker.js` 对应 `miniprogram/workers/search.js`，沿用相同的消息协议（init / ready / search / results / error）；浏览器不支持 Worker 时自动退回主线程运行同一引擎。
 - 关于页 `web/about.html` 对应 `miniprogram/pages/about/`。
+- 单文件版（`dist/`，由 `scripts/build-standalone.cjs` 生成）为兼容手机内置浏览器，引擎直接在主线程运行，不使用 Worker；检索引擎与数据文件仍逐字节内嵌原文件。
 
 本地预览：在仓库根目录运行 `python3 -m http.server <port>`，浏览器打开 `http://localhost:<port>/web/`。
 
@@ -18,13 +19,20 @@
 
 **方式 A：直接发文件（不依赖任何托管，立即可用）**
 
-单文件 `dist/verse-echo.html` 已随仓库提交（约 18 MB，五个译本与检索引擎全部内嵌，数据与 miniprogram/ 原件一致）。合并到 main 后可直接用这个地址下载或转发：
+两个单文件均已随仓库提交（数据与 miniprogram/ 原件一致，引擎在页面内主线程运行，无 Worker 依赖，兼容手机内置浏览器）：
 
-`https://github.com/juanhanyu/noble-to-your-life/raw/main/dist/verse-echo.html`
+| 文件 | 大小 | 说明 |
+|---|---|---|
+| `dist/verse-echo-cuvs.html` | 约 3.7 MB | **推荐发给微信/QQ 好友**：只内置和合本简体，手机打开快 |
+| `dist/verse-echo.html` | 约 18.4 MB | 五个译本全内置（和合本简繁、文理、ASV、KJV） |
 
-（当前工作分支的地址把 `main` 换成 `arena/24bd818f-noble-to-your-life` 即可。）
+下载（合并到 main 后把 `main` 换成当前分支名 `arena/24bd818f-noble-to-your-life`）：
 
-文件发到 QQ / 微信聊天，对方保存到手机后用浏览器打开即可查询——无需注册、无需联网。本地重新生成：`node scripts/build-standalone.cjs`。
+`https://github.com/juanhanyu/noble-to-your-life/raw/main/dist/verse-echo-cuvs.html`
+
+发到 QQ / 微信聊天，对方**保存到手机后用浏览器打开**即可查询——无需注册、无需联网。注意：微信聊天里直接点文件是"下载/预览"，不会运行网页，必须转到手机浏览器打开。
+
+本地重新生成：`node scripts/build-standalone.cjs`（全量）或 `node scripts/build-standalone.cjs --edition <id>`（单译本，id 见 miniprogram/manifest.js）。
 
 **方式 B：发链接（体验最接近小程序，需一次性开启 GitHub Pages）**
 
