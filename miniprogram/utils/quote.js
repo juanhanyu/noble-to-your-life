@@ -1,0 +1,3 @@
+function formatQuote(r,{whole=false,template='“{text}”（{book} {chapter}:{verse}）',withVersion=false}={}){const fields={text:whole?r.text:r.snippet,book:r.bookName,chapter:r.chapter,verse:r.verse,version:r.versionName};return template.replace(/\{(text|book|chapter|verse|version)\}/g,(_,k)=>fields[k])+(withVersion&&!template.includes('{version}')?`〔${r.versionName}〕`:'');}
+
+module.exports={formatQuote};

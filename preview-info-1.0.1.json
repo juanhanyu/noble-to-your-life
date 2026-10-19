@@ -1,0 +1,75 @@
+{
+  "size": {
+    "total": 19152174,
+    "packages": [
+      {
+        "name": "TOTAL",
+        "size": 19152174
+      },
+      {
+        "name": "main",
+        "size": 102898
+      },
+      {
+        "name": "/library/asv0/",
+        "size": 1725627
+      },
+      {
+        "name": "/library/asv1/",
+        "size": 1572322
+      },
+      {
+        "name": "/library/asv2/",
+        "size": 1233084
+      },
+      {
+        "name": "/library/cuvs0/",
+        "size": 1334774
+      },
+      {
+        "name": "/library/cuvs1/",
+        "size": 1237041
+      },
+      {
+        "name": "/library/cuvs2/",
+        "size": 1034792
+      },
+      {
+        "name": "/library/cuvt0/",
+        "size": 1334741
+      },
+      {
+        "name": "/library/cuvt1/",
+        "size": 1236981
+      },
+      {
+        "name": "/library/cuvt2/",
+        "size": 1034741
+      },
+      {
+        "name": "/library/kjv0/",
+        "size": 1728296
+      },
+      {
+        "name": "/library/kjv1/",
+        "size": 1564493
+      },
+      {
+        "name": "/library/kjv2/",
+        "size": 1237030
+      },
+      {
+        "name": "/library/wenli0/",
+        "size": 1023181
+      },
+      {
+        "name": "/library/wenli1/",
+        "size": 985094
+      },
+      {
+        "name": "/library/wenli2/",
+        "size": 767079
+      }
+    ]
+  }
+}

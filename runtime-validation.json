@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-19",
+  "report": [
+    {
+      "query": "可以给我水喝吗",
+      "pass": true
+    },
+    {
+      "query": "你们这里有什么吃的吗",
+      "pass": true
+    },
+    {
+      "query": "你也想去吗",
+      "pass": true
+    },
+    {
+      "query": "你手里拿的是什么",
+      "pass": true
+    },
+    {
+      "test": "citation and complete verse",
+      "pass": true
+    },
+    {
+      "edition": "cuvt",
+      "count": 31103,
+      "pass": true
+    },
+    {
+      "edition": "wenli",
+      "count": 31095,
+      "pass": true
+    },
+    {
+      "edition": "asv",
+      "count": 31086,
+      "pass": true
+    },
+    {
+      "edition": "kjv",
+      "count": 31102,
+      "pass": true
+    },
+    {
+      "test": "about navigation",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

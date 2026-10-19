@@ -1,0 +1,1 @@
+.about{line-height:1.9}.about>image{width:130rpx;height:130rpx;border-radius:25rpx}.heading{font-family:serif;font-size:38rpx;font-weight:600;margin:18rpx 0}.block{margin:45rpx 0;color:#66705f}.block .heading{font-size:32rpx;color:#344936}.block text{white-space:pre-wrap}.block button{margin:20rpx 0}

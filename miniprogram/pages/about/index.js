@@ -1,0 +1,1 @@
+Page({copySource(){wx.setClipboardData({data:'https://github.com/scrollmapper/bible_databases'})}})
