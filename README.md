@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 言有出处 · 微信小程序
 
 原生 WXML / WXSS / JavaScript 小程序，AppID 沿用本机已注册项目。
@@ -9,3 +10,6 @@
 内置数据分为 15 个分包，完整保留 155489 条非空经节。来源与校验信息见 miniprogram/manifest.json。
 
 平台审核与正式上线状态见 RELEASE.md，上传成功不等于审核通过或正式发布。
+=======
+# noble-to-your-life
+>>>>>>> d96d665f65aba8eb892579ac5e563f94c95db62c
