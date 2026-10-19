@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#101014" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>书里 · 这句话出自哪本书？</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>📖 书里</h1>
+      <p class="subtitle">这句话，出自哪本书？</p>
+      <button id="btn-lib" class="icon-btn" title="书库管理">🗂️ 书库</button>
+    </header>
+
+    <div class="search-box">
+      <input id="q" type="search" placeholder="输入一句想查的话，如：学而不思则罔" autocomplete="off" autocapitalize="off" />
+      <div class="search-actions">
+        <button id="btn-search" class="btn primary">🔍 查询</button>
+        <button id="btn-random" class="btn" title="随机来一句">🎲</button>
+        <button id="btn-share" class="btn" title="复制结果分享链接">🔗</button>
+      </div>
+    </div>
+
+    <div id="stat-line" class="stat-line"></div>
+    <div id="result-count" class="result-count"></div>
+    <main id="results"></main>
+
+    <div id="empty-hint" class="empty-hint">
+      <div class="big">✍️</div>
+      <p>输入一句话，查它是不是出自某本书。</p>
+      <p class="muted">支持精确匹配；记错一两个字也能模糊搜出相似句。</p>
+      <p class="muted">把链接发给 QQ / 微信好友，点开就能查。</p>
+    </div>
+
+    <footer class="footer">
+      <p>书里 ShuLi · 把链接发给朋友一起查名句出处</p>
+    </footer>
+  </div>
+
+  <!-- 书库抽屉 -->
+  <div id="drawer-mask" class="drawer-mask"></div>
+  <aside id="drawer" class="drawer">
+    <div class="drawer-head">
+      <h2>书库管理</h2>
+      <button class="icon-btn modal-close" data-close>✕</button>
+    </div>
+    <p id="drawer-stats" class="muted"></p>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="import">📥 导入</button>
+      <button class="tab-btn" data-tab="custom">✏️ 我的</button>
+      <button class="tab-btn" data-tab="remote">☁️ 云端</button>
+    </nav>
+
+    <section id="tab-import" class="tab-page active">
+      <h3>导入整本书文本</h3>
+      <p class="muted">粘贴书籍全文，按句自动切分（「。」！？」结尾成句；「第X回/章」自动识别为章节）。仅存在你自己的设备上。</p>
+      <input id="import-book" placeholder="书名，如：红楼梦" />
+      <input id="import-author" placeholder="作者（可选）" />
+      <textarea id="import-text" rows="7" placeholder="把整本书的文本粘贴到这里……"></textarea>
+      <button id="btn-parse-text" class="btn primary full">解析并导入</button>
+
+      <h3>导入 JSON 书库</h3>
+      <p class="muted">格式：[{"t":"句子","b":"书名","c":"章节","a":"作者"}]</p>
+      <textarea id="import-json-text" rows="3" placeholder='[{"t":"…","b":"…"}]'></textarea>
+      <button id="btn-import-json" class="btn full">粘贴 JSON 并导入</button>
+      <label class="btn ghost full file-btn">选择 JSON 文件<input id="import-file" type="file" accept=".json,application/json" hidden /></label>
+    </section>
+
+    <section id="tab-custom" class="tab-page">
+      <div id="custom-list"></div>
+      <button id="btn-export" class="btn full">⬇️ 导出我的书库</button>
+      <button id="btn-clear-custom" class="btn danger full">清空我的添加</button>
+    </section>
+
+    <section id="tab-remote" class="tab-page">
+      <p class="muted">通过链接参数 <code>?lib=JSON网址</code> 加载云端书库（需支持跨域，如 GitHub 仓库的 raw 文件），所有人打开同一个链接即可查询同一份书库。</p>
+      <div id="lib-list"></div>
+    </section>
+  </aside>
+
+  <!-- 手动添加弹窗 -->
+  <div id="modal-manual" class="modal">
+    <div class="modal-card">
+      <div class="drawer-head"><h2>手动添加一句</h2><button class="icon-btn modal-close">✕</button></div>
+      <textarea id="manual-text" rows="3" placeholder="句子原文"></textarea>
+      <input id="manual-book" placeholder="出自哪本书（必填时可为空）" />
+      <div class="two-col">
+        <input id="manual-chapter" placeholder="章节（可选）" />
+        <input id="manual-author" placeholder="作者（可选）" />
+      </div>
+      <button id="btn-manual-save" class="btn primary full">保存</button>
+    </div>
+  </div>
+
+  <button id="fab-add" class="fab" title="手动添加一句">＋</button>
+  <div id="toast" class="toast"></div>
+
+  <script src="data/quotes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

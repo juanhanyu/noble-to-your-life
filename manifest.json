@@ -1,0 +1,15 @@
+{
+  "name": "书里 · 句子出处查询",
+  "short_name": "书里",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#101014",
+  "theme_color": "#101014",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
