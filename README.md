@@ -18,7 +18,13 @@
 
 **方式 A：直接发文件（不依赖任何托管，立即可用）**
 
-运行 `node scripts/build-standalone.cjs` 生成 `dist/verse-echo.html`（约 18 MB 单文件，五个译本与检索引擎全部内嵌，数据与 miniprogram/ 原件一致）。把这个文件发到 QQ / 微信聊天，对方保存到手机后用浏览器打开即可查询——无需注册、无需联网。
+单文件 `dist/verse-echo.html` 已随仓库提交（约 18 MB，五个译本与检索引擎全部内嵌，数据与 miniprogram/ 原件一致）。合并到 main 后可直接用这个地址下载或转发：
+
+`https://github.com/juanhanyu/noble-to-your-life/raw/main/dist/verse-echo.html`
+
+（当前工作分支的地址把 `main` 换成 `arena/24bd818f-noble-to-your-life` 即可。）
+
+文件发到 QQ / 微信聊天，对方保存到手机后用浏览器打开即可查询——无需注册、无需联网。本地重新生成：`node scripts/build-standalone.cjs`。
 
 **方式 B：发链接（体验最接近小程序，需一次性开启 GitHub Pages）**
 
