@@ -24,7 +24,8 @@
     favorite2: $('favorite-2'), settingsOpen: $('settings-open'), settings: $('settings'),
     whole: $('whole'), withVersion: $('with-version'), template: $('template'),
     resetTemplate: $('reset-template'), share: $('share'), shareHint: $('share-hint'),
-    aboutOpen: $('about-open'), about: $('about'), copySource: $('copy-source'), toast: $('toast')
+    aboutOpen: $('about-open'), about: $('about'), copySource: $('copy-source'), toast: $('toast'),
+    shareTop: $('share-top')
   };
 
   var state = {
@@ -454,20 +455,26 @@
     el.template.addEventListener('input', function () { state.template = el.template.value; renderPreview(); });
     el.resetTemplate.addEventListener('click', function () { state.template = DEFAULT_TEMPLATE; saveStore(); renderPreview(); render(); });
 
-    el.share.addEventListener('click', async function () {
+    async function share() {
       var url = shareUrl();
       var text = state.preview || '言有出处 · 日常话，早有出处';
       if (navigator.share) {
         try {
           await navigator.share({ title: '言有出处', text: text, url: url });
           return;
-        } catch (e) { /* 用户取消或不支持，转为复制 */ }
+        } catch (e) {
+          if (e && e.name === 'AbortError') return; // 用户主动取消
+        }
       }
       var ok = await copyText(url);
       el.shareHint.textContent = ok
         ? '链接已复制，粘贴到微信或 QQ 发给好友即可。'
         : '请长按地址栏复制本页链接：' + url;
-    });
+      toast(ok ? '链接已复制，到微信或 QQ 里粘贴给好友' : '复制失败，请长按地址栏复制链接');
+    }
+
+    el.share.addEventListener('click', share);
+    el.shareTop.addEventListener('click', share);
 
     el.copySource.addEventListener('click', async function () {
       var ok = await copyText(SOURCE_URL);
