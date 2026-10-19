@@ -16,6 +16,8 @@ test('dist/verse-echo.html 单文件版 DOM 冒烟测试', { timeout: 120000 }, 
   if (!fs.existsSync(file)) return t.skip('dist/verse-echo.html 不存在，先运行 node scripts/build-standalone.cjs');
 
   const html = fs.readFileSync(file, 'utf8');
+  assert.ok(!html.includes('assets/icon.png'), '图标应内嵌为 data URI，不应再有相对路径引用');
+  assert.ok(html.includes('data:image/png;base64,'), '应包含内嵌图标');
   const errors = [];
   const dom = new JSDOM(html, {
     url: 'http://localhost:8080/verse-echo.html',

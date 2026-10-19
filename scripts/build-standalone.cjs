@@ -175,6 +175,10 @@ const aboutCss = read(path.join(web, 'about.css'))
   '.about-close-row { margin-top: 26px; }\n.about-close-row button { width: 100%; line-height: 41px; border-radius: 8px; }';
 html = html.replace('</style>', aboutCss + '\n</style>');
 
+// 7) 图标内嵌为 data URI（单文件版没有 assets/ 目录）
+const iconDataUri = 'data:image/png;base64,' + fs.readFileSync(path.join(web, 'assets', 'icon.png')).toString('base64');
+html = html.split('assets/icon.png').join(iconDataUri);
+
 const outDir = path.join(root, 'dist');
 fs.mkdirSync(outDir, { recursive: true });
 const out = path.join(outDir, 'verse-echo.html');
