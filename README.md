@@ -14,7 +14,24 @@
 
 本地预览：在仓库根目录运行 `python3 -m http.server <port>`，浏览器打开 `http://localhost:<port>/web/`。
 
-测试：`node --test tests/web-port.test.cjs`（校验复用文件与原件一致、模拟 Worker 环境加载全部五个译本、检索行为、引用模板、页面结构）。
+### 怎么发给 QQ / 微信好友
+
+**方式 A：直接发文件（不依赖任何托管，立即可用）**
+
+运行 `node scripts/build-standalone.cjs` 生成 `dist/verse-echo.html`（约 18 MB 单文件，五个译本与检索引擎全部内嵌，数据与 miniprogram/ 原件一致）。把这个文件发到 QQ / 微信聊天，对方保存到手机后用浏览器打开即可查询——无需注册、无需联网。
+
+**方式 B：发链接（体验最接近小程序，需一次性开启 GitHub Pages）**
+
+在 [Settings → Pages](https://github.com/juanhanyu/noble-to-your-life/settings/pages) 选择 *Deploy from a branch*：分支选 `main`（合并本分支后；合并前可先选当前工作分支 `arena/24bd818f-noble-to-your-life`），文件夹选 `/web`，保存后约一两分钟生效。之后把链接
+
+`https://juanhanyu.github.io/noble-to-your-life/`
+
+发给好友，在聊天里点开即在内置浏览器中使用，收藏会留在对方设备浏览器里。
+
+### 测试
+
+- `node --test tests/web-port.test.cjs`：校验复用文件与原件一致、模拟 Worker 环境加载全部五个译本、检索行为、引用模板、页面结构（无第三方依赖）。
+- `node --test tests/web-standalone.test.cjs`：单文件版 DOM 冒烟测试（需要 `npm i jsdom`，未安装时自动跳过）。
 
 ## 微信小程序
 

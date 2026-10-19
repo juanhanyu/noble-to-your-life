@@ -2,7 +2,11 @@
 
 ## 网页版（H5）新增
 
-按用户要求新增纯静态网页版 `web/`：发给 QQ / 微信好友的链接点开即可查询，绕开小程序注册。页面逻辑与界面移植自小程序源码；引擎、繁简映射、译本元数据、引用模板与 15 个文字库数据文件全部原样复用（逐字节一致，见 `tests/web-port.test.cjs` 校验）。Worker 协议不变，不支持 Worker 的浏览器自动退回主线程。仓库根 `index.html` 跳转到 `web/`。已通过 GitHub Pages 从 `web/` 目录发布；合并到 main 后请将 Pages 源分支从当前工作分支改回 main。
+按用户要求新增纯静态网页版 `web/`：发给 QQ / 微信好友的链接点开即可查询，绕开小程序注册。页面逻辑与界面移植自小程序源码；引擎、繁简映射、译本元数据、引用模板与 15 个文字库数据文件全部原样复用（逐字节一致，见 `tests/web-port.test.cjs` 校验）。Worker 协议不变，不支持 Worker 的浏览器自动退回主线程。仓库根 `index.html` 跳转到 `web/`。
+
+新增单文件构建 `scripts/build-standalone.cjs`：生成 `dist/verse-echo.html`（约 18 MB，引擎与全部数据内嵌、零网络依赖），可直接作为文件发给 QQ / 微信好友，对方浏览器打开即用。DOM 冒烟测试 `tests/web-standalone.test.cjs`（需 jsdom，缺省自动跳过）。
+
+GitHub Pages 尚未开启：本环境令牌无 Pages 权限（API 返回 403），需在 Settings → Pages 手动选择 Deploy from a branch（分支 main / 文件夹 /web）。开启并发布后，发给好友的链接为 https://juanhanyu.github.io/noble-to-your-life/ 。
 
 ## 1.0.1 最新状态
 
