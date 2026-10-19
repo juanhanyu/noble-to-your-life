@@ -1,5 +1,22 @@
-<<<<<<< HEAD
-# 言有出处 · 微信小程序
+# 言有出处
+
+日常话，找一句带出处的真实原句。内置五个译本、155489 条非空经节，检索全部在本机完成，不上传搜索词。
+
+## 网页版（发给 QQ / 微信好友直接用）
+
+`web/` 是由小程序移植出的纯静态网页，无需服务器、无需构建、无需小程序注册：
+
+- 把仓库部署到任意静态托管（当前已通过 GitHub Pages 从 `web/` 目录发布），把链接发给 QQ / 微信好友，点开即在聊天内浏览器里使用。
+- 页面逻辑 `web/app.js` 移植自 `miniprogram/pages/index/index.js`，方法名与流程保持一致；`web/index.html`、`web/style.css` 由 `index.wxml`、`index.wxss`（含 `app.wxss`）换算而来，结构与类名一致。
+- 检索引擎 `web/engine.js`、繁简映射 `web/normalize.js`、译本元数据 `web/manifest.js`、引用模板 `web/quote.js`，以及 15 个文字库数据文件 `web/data/*.js` 与 `miniprogram/` 原件逐字节一致，未做修改。
+- `web/worker.js` 对应 `miniprogram/workers/search.js`，沿用相同的消息协议（init / ready / search / results / error）；浏览器不支持 Worker 时自动退回主线程运行同一引擎。
+- 关于页 `web/about.html` 对应 `miniprogram/pages/about/`。
+
+本地预览：在仓库根目录运行 `python3 -m http.server <port>`，浏览器打开 `http://localhost:<port>/web/`。
+
+测试：`node --test tests/web-port.test.cjs`（校验复用文件与原件一致、模拟 Worker 环境加载全部五个译本、检索行为、引用模板、页面结构）。
+
+## 微信小程序
 
 原生 WXML / WXSS / JavaScript 小程序，AppID 沿用本机已注册项目。
 
@@ -10,6 +27,3 @@
 内置数据分为 15 个分包，完整保留 155489 条非空经节。来源与校验信息见 miniprogram/manifest.json。
 
 平台审核与正式上线状态见 RELEASE.md，上传成功不等于审核通过或正式发布。
-=======
-# noble-to-your-life
->>>>>>> d96d665f65aba8eb892579ac5e563f94c95db62c
