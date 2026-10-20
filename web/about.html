@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f8f6f0">
+<title>关于 · 言有出处</title>
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="about.css">
+</head>
+<body>
+<div class="page about">
+  <div class="row nav"><span class="link" id="backBtn">← 返回查询</span><span class="muted">关于</span></div>
+  <img src="assets/icon.png" alt="言有出处">
+  <div class="heading">言有出处</div>
+  <div class="muted">VERSE ECHO · 网页版</div>
+  <div class="block"><div class="heading">一个日常聊天的小玩具</div><p>灵感来自一张论坛截图：喝水、吃饭、问名字，竟然都能找到一句带出处的原文。输入你想说的话，看看古老文字里有没有相似的回声。</p></div>
+  <div class="block"><div class="heading">怎么玩</div><p>1. 输入日常句子，或直接点例句。
+2. 选择相近表达或原文包含，也能输入「约翰福音 4:7」定位。
+3. 选中原句，查看完整经节，再复制或收藏。
+4. 相近表达使用同义词和字词匹配；不会生成或改写经文，也不保证复杂改写都能命中。</p></div>
+  <div class="block"><div class="heading">原文与出处</div><p>保留原项目的五个文字版本：和合本简体、繁体、文理和合本、ASV、KJV。简繁体属于同一译本。全部文字来自 scrollmapper/bible_databases；简体经 OpenCC 转换，中文书卷名统一使用简体。空白经节已跳过，章节目保留各版本编号。
+
+短句可能是整节中的摘录，请结合完整上下文理解。这个工具用于文字趣味检索。</p><button class="pill" id="copySource" type="button">复制数据来源链接</button></div>
+  <div class="block"><div class="heading">隐私说明</div><p>无需登录，不收集手机号、位置或通讯录。内置文字库按需下载，搜索在本机完成，不上传搜索词。收藏仅保存在当前设备浏览器，可在选中句子后再次点击收藏取消。复制仅在你点击复制时调用浏览器剪贴板；仅在你点击「粘贴」时读取剪贴板文字用于查询，不上传内容。清理浏览器数据会清除本地收藏。</p></div>
+  <div class="block"><div class="heading">许可说明</div><p>程序代码遵循 MIT 许可。历史译本保留各自权利状态；KJV 在英国存在单独权利规则。详细来源、校验值和跳过经节记录随源码 manifest.json 提供。</p></div>
+</div>
+<script src="about.js"></script>
+</body>
+</html>

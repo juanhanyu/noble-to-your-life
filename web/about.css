@@ -1,0 +1,24 @@
+/* 网页版关于页样式 —— 由 miniprogram/pages/about/index.wxss 换算而来（1rpx = 0.5px），并补充网页返回栏。 */
+html, body { margin: 0; padding: 0; }
+body {
+  background: #f8f6f0;
+  color: #344936;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  font-size: 14px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.muted { color: #898b80; font-size: 12px; }
+.link { color: #b65d3b; }
+button { border: 0; background: none; font-family: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.page { padding: 18px 17px 35px; }
+.row { display: flex; align-items: center; justify-content: space-between; }
+.nav { margin-bottom: 6px; }
+.about { line-height: 1.9; }
+.about > img { width: 65px; height: 65px; border-radius: 12.5px; }
+.heading { font-family: serif; font-size: 19px; font-weight: 600; margin: 9px 0; }
+.block { margin: 22.5px 0; color: #66705f; }
+.block .heading { font-size: 16px; color: #344936; }
+.block p { white-space: pre-wrap; margin: 0; }
+.block button { margin: 10px 0; }
+.pill { border: 0.5px solid #deded2; border-radius: 15px; background: transparent; color: #52604e; padding: 6px 12px; margin: 0; font-size: 12px; line-height: 1.5; }
