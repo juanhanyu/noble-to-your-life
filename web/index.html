@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f6f0">
+<meta name="format-detection" content="telephone=no">
+<title>言有出处 · 日常话，早有出处</title>
+<meta name="description" content="输入一句日常话，看看古老文字里有没有相似的回声。原文摘录，附真实出处，可直接复制。">
+<meta property="og:title" content="言有出处 · 日常话，早有出处">
+<meta property="og:description" content="输入一句日常话，看看古老文字里有没有相似的回声。">
+<meta property="og:image" content="icon.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="workspace">
+  <div class="row masthead">
+    <div class="brand">
+      <img src="icon.png" alt="">
+      <span>言有出处</span>
+      <span class="tagline">日常话，早有出处</span>
+    </div>
+    <span class="head-actions">
+      <span class="link small share-link" id="share-top">分享给好友</span>
+      <span class="link small" id="about-open">关于</span>
+    </span>
+  </div>
+
+  <div class="row input-heading">
+    <span id="input-title">你想说什么？</span>
+    <span class="input-actions"><span class="link" id="paste">粘贴</span><span class="muted" id="clear">清空</span></span>
+  </div>
+
+  <form class="search-box" id="search-form">
+    <input id="query" type="search" maxlength="120" autocomplete="off" enterkeyhint="search"
+      placeholder="输入日常话，寻找真实原句" aria-label="输入日常话">
+    <button class="primary" id="search" type="submit">查询</button>
+  </form>
+
+  <div class="examples">
+    <span class="muted">试试</span>
+    <span class="example-row" id="examples"></span>
+  </div>
+
+  <div class="row filters">
+    <div class="tabs">
+      <span class="active" data-mode="smart">相近表达</span>
+      <span data-mode="exact">原文包含</span>
+    </div>
+    <label class="picker">
+      <select id="edition" aria-label="选择文字版本"></select>
+      <span class="caret">▾</span>
+    </label>
+  </div>
+
+  <div class="row results-heading">
+    <span id="results-title">查询结果</span>
+    <span>
+      <span class="muted status" id="count">0 条</span>
+      <span class="link" id="toggle-favorites">收藏</span>
+    </span>
+  </div>
+
+  <div class="result-list" id="results"></div>
+
+  <div class="copy-panel">
+    <div class="preview placeholder" id="preview">选中原句后，在这里一键复制原句与出处</div>
+    <div class="copy-actions">
+      <button class="primary copy-button" id="copy" disabled>复制原句与出处</button>
+      <button class="secondary" id="favorite" disabled>收藏</button>
+      <button class="secondary settings-button" id="settings-open">格式</button>
+    </div>
+    <div class="footnote">原文摘录 · 不生成经文 · 请结合上下文</div>
+  </div>
+</div>
+
+<div class="overlay" id="settings" hidden>
+  <div class="sheet" role="dialog" aria-label="引用格式">
+    <div class="row"><span>引用格式</span><span class="link" data-close="settings">完成</span></div>
+    <div class="row option"><span>引用完整经节</span><label class="switch"><input type="checkbox" id="whole"><i></i></label></div>
+    <div class="row option"><span>附上译本名称</span><label class="switch"><input type="checkbox" id="with-version"><i></i></label></div>
+    <input id="template" maxlength="200" aria-label="引用模板">
+    <div class="muted">可用：{text} {book} {chapter} {verse} {version}</div>
+    <div class="row settings-footer">
+      <span class="link" id="reset-template">恢复默认</span>
+      <span class="spacer"></span>
+      <button class="secondary" id="share">分享链接 ↗</button>
+      <button class="primary" id="favorite-2">收藏</button>
+    </div>
+    <div class="muted share-hint" id="share-hint">把链接发到微信或 QQ，对方点开就能直接看到这句话的出处。</div>
+  </div>
+</div>
+
+<div class="overlay" id="about" hidden>
+  <div class="sheet about-sheet" role="dialog" aria-label="关于">
+    <div class="row"><span class="sheet-title">关于 · 言有出处</span><span class="link" data-close="about">关闭</span></div>
+    <div class="sheet-body">
+      <div class="block">
+        <div class="heading">一个日常聊天的小玩具</div>
+        <p>灵感来自一张论坛截图：喝水、吃饭、问名字，竟然都能找到一句带出处的原文。输入你想说的话，看看古老文字里有没有相似的回声。</p>
+      </div>
+      <div class="block">
+        <div class="heading">怎么用</div>
+        <p>1. 把链接发给微信或 QQ 好友，点开即可使用，不用安装。<br>
+        2. 输入日常句子，或直接点例句。<br>
+        3. 选择「相近表达」或「原文包含」，也能输入「约翰福音 4:7」定位。<br>
+        4. 选中原句，查看完整经节，再复制或收藏。<br>
+        5. 相近表达使用同义词和字词匹配；不会生成或改写经文，也不保证复杂改写都能命中。</p>
+      </div>
+      <div class="block">
+        <div class="heading">原文与出处</div>
+        <p>保留原项目的五个文字版本：和合本简体、繁体、文理和合本、ASV、KJV。简繁体属于同一译本。全部文字来自 scrollmapper/bible_databases；简体经 OpenCC 转换，中文书卷名统一使用简体。空白经节已跳过，章节目保留各版本编号。</p>
+        <p>短句可能是整节中的摘录，请结合完整上下文理解。这个工具用于文字趣味检索。</p>
+        <button class="pill" id="copy-source">复制数据来源链接</button>
+      </div>
+      <div class="block">
+        <div class="heading">隐私说明</div>
+        <p>无需登录，不收集手机号、位置或通讯录。文字库按需下载，检索在你的手机浏览器里完成，不上传搜索词。收藏只保存在这台设备的浏览器里，可在选中句子后再次点击收藏取消；清理浏览器数据会清除收藏。复制只在点击复制时写入剪贴板；只有点击「粘贴」时才会读取剪贴板文字用于查询。</p>
+      </div>
+      <div class="block">
+        <div class="heading">许可说明</div>
+        <p>程序代码遵循 MIT 许可。历史译本保留各自权利状态；KJV 在英国存在单独权利规则。详细来源、校验值和跳过经节记录随源码 manifest.json 提供。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<noscript><div class="toast" style="display:block">这个页面需要启用 JavaScript 才能查询。</div></noscript>
+<script src="app.js"></script>
+</body>
+</html>
